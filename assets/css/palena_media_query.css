@@ -1,0 +1,34 @@
+
+@media only screen and (min-device-width:210px) and (max-device-width: 600px) {
+    .story .story_slider  .story_title .btn_read_story a{
+        width: 80%;
+    }
+    .trending_products .card img{
+        max-width:400px;
+    }
+    .blog_post_title h2{
+        font-size: 1.2rem;
+    }
+}
+@media only screen and (min-device-width:601px) and (max-device-width: 992px) {
+    .story .story_slider  .story_title .btn_read_story a{
+        width: 60%;
+    }
+}
+@media only screen and (min-device-width: 801px) and (max-device-width: 992px) {
+
+}
+@media only screen and (min-device-width:922px) {
+    .trending_products .card img{
+        max-width:600px;
+    }
+    .breadcrumb-item {
+        margin-left: 200px;
+    }
+}
+@media only screen and (max-device-width:601px) {
+    .info_tabs .sticky-top h1{
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+}
