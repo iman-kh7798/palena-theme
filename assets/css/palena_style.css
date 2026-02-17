@@ -1,3 +1,4 @@
+
 @font-face {
     font-family: 'Urbanist';
     src: url('../fonts/Urbanist.woff2') format('woff2'),
@@ -408,7 +409,7 @@ a:hover {
     color: #000;
     background-color: rgba(0, 0, 0, 0);
     border-color: rgba(0, 0, 0, 0.4);
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
 }
 
 .btn_outline_pf:hover {
@@ -1407,3 +1408,27 @@ span.input-has-error {
 }
 
 
+.single-product-accordion .card{
+border: 0;
+}
+
+.single-product-accordion .card-header{
+padding: 0;
+
+}
+
+.single-product-accordion .card-header .btn{
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 16px;
+}
+
+.single-product-accordion .btn:focus{
+box-shadow: none;
+outline: 0;
+}
+
+.single-product-accordion .card-body{
+    padding: 1.25rem 0;
+    font-size: 14px;
+}

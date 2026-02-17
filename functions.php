@@ -29,21 +29,23 @@ require get_template_directory() . '/functions/productFunctions/askTheSeller_cus
 require get_template_directory() . '/functions/basicFunctions.php';
 require get_template_directory() . '/functions/themeSetting.php';
 
-function idea_is_edit_page($new_edit = null){
+function idea_is_edit_page($new_edit = null)
+{
     global $pagenow;
     //make sure we are on the backend
     if (!is_admin()) return false;
 
 
-    if($new_edit == "edit")
-        return in_array( $pagenow, array( 'post.php',  ) );
-    elseif($new_edit == "new") //check for new post page
-        return in_array( $pagenow, array( 'post-new.php' ) );
+    if ($new_edit == "edit")
+        return in_array($pagenow, array('post.php',));
+    elseif ($new_edit == "new") //check for new post page
+        return in_array($pagenow, array('post-new.php'));
     else //check for either new or edit
-        return in_array( $pagenow, array( 'post.php', 'post-new.php' ) );
+        return in_array($pagenow, array('post.php', 'post-new.php'));
 }
 
-function cc_mime_types($mimes) {
+function cc_mime_types($mimes)
+{
     $mimes['svg'] = 'image/svg+xml';
     return $mimes;
 }
@@ -51,34 +53,38 @@ add_filter('upload_mimes', 'cc_mime_types');
 
 
 // Increase the image resize threshold to 4000px on the longest edge
-function smartwp_big_image_size_threshold( $threshold ) {
- return 4000;
+function smartwp_big_image_size_threshold($threshold)
+{
+    return 4000;
 }
-add_filter( 'big_image_size_threshold', 'smartwp_big_image_size_threshold', 999, 1);
+add_filter('big_image_size_threshold', 'smartwp_big_image_size_threshold', 999, 1);
 
 
 /*--------------------Disable Right Click-----------------------------------*/
-function disable_right_click() {
+function disable_right_click()
+{
     echo "<script>document.oncontextmenu = function(){return false;};</script>";
 }
-add_action( 'wp_footer', 'disable_right_click' );
+add_action('wp_footer', 'disable_right_click');
 
 
-function remove_jquery_migrate( $scripts ) {
+function remove_jquery_migrate($scripts)
+{
 
-    if ( ! is_admin() && isset( $scripts->registered['jquery'] ) ) {
+    if (! is_admin() && isset($scripts->registered['jquery'])) {
 
         $script = $scripts->registered['jquery'];
 
-        if ( $script->deps ) {
-            $script->deps = array_diff( $script->deps, array( 'jquery-migrate' ) );
+        if ($script->deps) {
+            $script->deps = array_diff($script->deps, array('jquery-migrate'));
         }
     }
 }
-add_action( 'wp_default_scripts', 'remove_jquery_migrate' );
+add_action('wp_default_scripts', 'remove_jquery_migrate');
 
 
-function golden_oak_web_design_blog_generate_rewrite_rules( $wp_rewrite ) {
+function golden_oak_web_design_blog_generate_rewrite_rules($wp_rewrite)
+{
     $new_rules = array(
         '(([^/]+/)*blog)/page/?([0-9]{1,})/?$' => 'index.php?pagename=$matches[1]&paged=$matches[3]',
         'blog/([^/]+)/?$' => 'index.php?post_type=post&name=$matches[1]',
@@ -107,20 +113,22 @@ function golden_oak_web_design_blog_generate_rewrite_rules( $wp_rewrite ) {
     );
     $wp_rewrite->rules = $new_rules + $wp_rewrite->rules;
 }
-add_action( 'generate_rewrite_rules', 'golden_oak_web_design_blog_generate_rewrite_rules' );
+add_action('generate_rewrite_rules', 'golden_oak_web_design_blog_generate_rewrite_rules');
 
-function golden_oak_web_design_update_post_link( $post_link, $id = 0 ) {
-    $post = get_post( $id );
-    if( is_object( $post ) && $post->post_type == 'post' ) {
-        return home_url( '/blog/' . $post->post_name );
+function golden_oak_web_design_update_post_link($post_link, $id = 0)
+{
+    $post = get_post($id);
+    if (is_object($post) && $post->post_type == 'post') {
+        return home_url('/blog/' . $post->post_name);
     }
     return $post_link;
 }
-add_filter( 'post_link', 'golden_oak_web_design_update_post_link', 1, 3 );
+add_filter('post_link', 'golden_oak_web_design_update_post_link', 1, 3);
 
 
 // Product Registrations
-function custom_product_registration_post_type() {
+function custom_product_registration_post_type()
+{
     $labels = array(
         'name'               => 'Product Registrations',
         'singular_name'      => 'Product Registration',
@@ -143,16 +151,16 @@ function custom_product_registration_post_type() {
         'show_ui'            => true,
         'show_in_menu'       => true,
         'query_var'          => true,
-        'rewrite'            => array( 'slug' => 'product-registration' ),
+        'rewrite'            => array('slug' => 'product-registration'),
         'capability_type'    => 'post',
         'has_archive'        => true,
         'hierarchical'       => false,
         'menu_position'      => 20,
-        'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
-        'taxonomies'         => array( 'product_registration_category' ),
+        'supports'           => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
+        'taxonomies'         => array('product_registration_category'),
     );
 
-    register_post_type( 'product_registration', $args );
+    register_post_type('product_registration', $args);
 
     $taxonomy_labels = array(
         'name'                       => 'Categories',
@@ -179,20 +187,21 @@ function custom_product_registration_post_type() {
         'show_in_nav_menus' => true,
         'show_admin_column' => true,
         'hierarchical'      => true,
-        'rewrite'           => array( 'slug' => 'product-registration-category' ),
+        'rewrite'           => array('slug' => 'product-registration-category'),
     );
 
-    register_taxonomy( 'product_registration_category', 'product_registration', $taxonomy_args );
+    register_taxonomy('product_registration_category', 'product_registration', $taxonomy_args);
 }
-add_action( 'init', 'custom_product_registration_post_type' );
+add_action('init', 'custom_product_registration_post_type');
 
 
 
 //  product_registration search
-function handle_search_form() {
+function handle_search_form()
+{
     if (isset($_POST['post_number']) && !empty($_POST['post_number'])) {
         $post_number = sanitize_text_field($_POST['post_number']);
-        
+
         $args = array(
             'post_type' => 'product_registration',
             'name' => $post_number,
@@ -224,18 +233,21 @@ add_action('template_redirect', 'handle_search_form');
 
 
 
-add_action( 'admin_menu', 'remove_ask_the_seller_page' );
+add_action('admin_menu', 'remove_ask_the_seller_page');
 
-function remove_ask_the_seller_page() {
-    remove_menu_page( 'ask_the_seller' ); // Replace 'ask_the_seller' with the actual slug of the page
+function remove_ask_the_seller_page()
+{
+    remove_menu_page('ask_the_seller'); // Replace 'ask_the_seller' with the actual slug of the page
 }
-add_action( 'admin_menu', 'remove_ask_the_seller_custom_page' );
+add_action('admin_menu', 'remove_ask_the_seller_custom_page');
 
-function remove_ask_the_seller_custom_page() {
-    remove_menu_page( 'ask_the_seller_custom' ); // Replace 'ask_the_seller_custom' with the actual slug of the page
+function remove_ask_the_seller_custom_page()
+{
+    remove_menu_page('ask_the_seller_custom'); // Replace 'ask_the_seller_custom' with the actual slug of the page
 }
 
-function register_my_menus() {
+function register_my_menus()
+{
     register_nav_menus(array(
         'footer-one' => __('Footer Menu-One'),
         'footer-two' => __('Footer Menu-Two'),
@@ -257,7 +269,8 @@ add_action('init', 'register_my_menus');
 
 
 
-function display_search_results_and_form($content) {
+function display_search_results_and_form($content)
+{
     // بررسی اینکه آیا در صفحه جستجو خاص هستیم و شماره پست ارسال شده است
     if (is_page('verify-authenticity-result') && $_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['post_number'])) {
         $post_number = intval($_POST['post_number']);
@@ -288,7 +301,7 @@ function display_search_results_and_form($content) {
             setcookie('form_submission_status', '', time() - 3600, '/');
         }
 
-        ?>
+?>
         <form id="product-registration-form" method="post">
             <p>
                 <label for="name">Name:</label>
@@ -346,7 +359,8 @@ function display_search_results_and_form($content) {
 add_filter('the_content', 'display_search_results_and_form');
 
 // نمایش آخرین داده‌های ثبت‌نام در محتوای پست
-function display_latest_product_registration_data_in_content($content) {
+function display_latest_product_registration_data_in_content($content)
+{
     if (is_singular('product_registration') && is_main_query()) {
         $post_id = get_the_ID();
         $form_data = get_post_meta($post_id, 'product_registration_data', true);
@@ -372,7 +386,8 @@ function display_latest_product_registration_data_in_content($content) {
 add_filter('the_content', 'display_latest_product_registration_data_in_content');
 
 // افزودن فرم به محتوای پست
-function add_custom_form_to_product_registration($content) {
+function add_custom_form_to_product_registration($content)
+{
     if (is_singular('product_registration') && is_main_query()) {
         ob_start();
 
@@ -408,7 +423,7 @@ function add_custom_form_to_product_registration($content) {
                 <input type="submit" name="submit_product_registration" value="Submit">
             </p>
         </form>
-        <?php
+<?php
         $form = ob_get_clean();
         $content .= '<div class="container productRegistration">';
         $content .= '<div class="row justify-content-center mt-5">';
@@ -423,7 +438,8 @@ function add_custom_form_to_product_registration($content) {
 add_filter('the_content', 'add_custom_form_to_product_registration');
 
 // پردازش ارسال فرم
-function handle_product_registration_form_submission() {
+function handle_product_registration_form_submission()
+{
     if (isset($_POST['submit_product_registration'])) {
         $name = sanitize_text_field($_POST['name']);
         $phone = sanitize_text_field($_POST['phone']);
@@ -465,7 +481,8 @@ function handle_product_registration_form_submission() {
 }
 add_action('template_redirect', 'handle_product_registration_form_submission');
 
-function add_custom_meta_box() {
+function add_custom_meta_box()
+{
     add_meta_box(
         'product_registration_data_meta_box', // شناسه جعبه متا
         'Customer Data', // عنوان جعبه متا
@@ -478,20 +495,21 @@ function add_custom_meta_box() {
 add_action('add_meta_boxes', 'add_custom_meta_box');
 
 
-function display_product_registration_meta_box_content($post) {
+function display_product_registration_meta_box_content($post)
+{
     $form_data = get_post_meta($post->ID, 'product_registration_data', true);
 
     if ($form_data && is_array($form_data)) {
         echo '<table style="width:100%;border-collapse:collapse;">';
         echo '<thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Shipping Address</th><th>Professional Info</th><th>Actions</th></tr></thead>';
         echo '<tbody>';
-        
+
         echo '<tr><td colspan="6" style="text-align:right;">';
         echo '<form method="post" action="' . admin_url('admin-post.php') . '">';
         wp_nonce_field('delete_first_data_action', 'delete_first_data_nonce'); // اضافه کردن nonce
         echo '<input type="hidden" name="action" value="delete_first_product_registration_data">';
         echo '<input type="hidden" name="post_ID" value="' . esc_attr($post->ID) . '">';
-       
+
         echo '</form>';
         echo '</td></tr>';
 
@@ -524,7 +542,8 @@ function display_product_registration_meta_box_content($post) {
 
 
 // پردازش درخواست حذف اولین متا
-function handle_delete_first_product_registration_data() {
+function handle_delete_first_product_registration_data()
+{
     if (isset($_POST['delete_first_data_submit'])) {
         // بررسی nonce
         if (!isset($_POST['delete_first_data_nonce']) || !wp_verify_nonce($_POST['delete_first_data_nonce'], 'delete_first_data_action')) {
@@ -568,7 +587,8 @@ function handle_delete_first_product_registration_data() {
 add_action('admin_post_delete_first_product_registration_data', 'handle_delete_first_product_registration_data');
 
 // پردازش درخواست حذف داده‌ها
-function handle_delete_product_registration_data() {
+function handle_delete_product_registration_data()
+{
     // ثبت شروع پردازش
     error_log('Start processing delete request.');
 

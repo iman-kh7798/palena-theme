@@ -27,51 +27,51 @@
             <div class="col-6 col-md-3 col-xl-2 footer_links d-flex flex-column mt-3">
                 <span>OUR COMPANY</span>
                 <?php
-                    wp_nav_menu(array(
-                        'theme_location' => 'footer-one',
-                        'container' => 'nav',
-                        'container_class' => 'primary-menu-class',
-                        'menu_class' => 'menu'
-                    ));
-                    ?>
+                wp_nav_menu(array(
+                    'theme_location' => 'footer-one',
+                    'container' => 'nav',
+                    'container_class' => 'primary-menu-class',
+                    'menu_class' => 'menu'
+                ));
+                ?>
 
             </div>
             <div class="col-6 col-md-3 col-xl-2 footer_links d-flex flex-column mt-3">
                 <span>SERVICES</span>
                 <?php
-                    wp_nav_menu(array(
-                        'theme_location' => 'footer-two',
-                        'container' => 'nav',
-                        'container_class' => 'primary-menu-class',
-                        'menu_class' => 'menu'
-                    ));
-                    ?>
+                wp_nav_menu(array(
+                    'theme_location' => 'footer-two',
+                    'container' => 'nav',
+                    'container_class' => 'primary-menu-class',
+                    'menu_class' => 'menu'
+                ));
+                ?>
             </div>
             <div class="col-6 col-md-3 col-xl-2 footer_links d-flex flex-column mt-3">
                 <span>LEGAL</span>
                 <?php
-                    wp_nav_menu(array(
-                        'theme_location' => 'footer-three',
-                        'container' => 'nav',
-                        'container_class' => 'primary-menu-class',
-                        'menu_class' => 'menu'
-                    ));
-                    ?>
+                wp_nav_menu(array(
+                    'theme_location' => 'footer-three',
+                    'container' => 'nav',
+                    'container_class' => 'primary-menu-class',
+                    'menu_class' => 'menu'
+                ));
+                ?>
             </div>
             <div class="col-6 col-md-3 col-xl-2 footer_links d-flex flex-column mt-3 last-col-footer">
                 <span>CONNECT</span>
                 <?php
-                    wp_nav_menu(array(
-                        'theme_location' => 'footer-four',
-                        'container' => 'nav',
-                        'container_class' => 'primary-menu-class',
-                        'menu_class' => 'menu'
-                    ));
-                    ?>
+                wp_nav_menu(array(
+                    'theme_location' => 'footer-four',
+                    'container' => 'nav',
+                    'container_class' => 'primary-menu-class',
+                    'menu_class' => 'menu'
+                ));
+                ?>
 
-                    
-                <?php if ( is_active_sidebar( 'social_network' ) ) : ?>
-                    <?php dynamic_sidebar( 'social_network' ); ?>
+
+                <?php if (is_active_sidebar('social_network')) : ?>
+                    <?php dynamic_sidebar('social_network'); ?>
                 <?php endif; ?>
 
 
@@ -87,48 +87,47 @@
 
     </div>
 </footer>
-<script src="<?= esc_url(get_template_directory_uri()); ?>/assets/js/jquery.js"></script>
 <script src="<?= esc_url(get_template_directory_uri()); ?>/assets/js/bootstrap.min.js"></script>
 <script src="<?= esc_url(get_template_directory_uri()); ?>/assets/js/swiper-bundle.min.js"></script>
 
 <?php
 if (is_page(16)) { ?>
     <script>
-    jQuery(document).ready(function($) {
-    // wishlist product add
-    function setHiddenFieldValue() {
-        var productNames = [];
-        $('.product_name').each(function() {
-            var name = $(this).text().trim();
-            if (name) {
-                productNames.push(name);
+        jQuery(document).ready(function($) {
+            // wishlist product add
+            function setHiddenFieldValue() {
+                var productNames = [];
+                $('.product_name').each(function() {
+                    var name = $(this).text().trim();
+                    if (name) {
+                        productNames.push(name);
+                    }
+                });
+
+                var hiddenField = $('.wishlist-product-list input[name="text-4"]');
+                if (hiddenField.length) {
+                    hiddenField.val(productNames.join(', '));
+                }
             }
+
+            $('form').on('submit', function(event) {
+                setHiddenFieldValue();
+            });
+
+            setTimeout(function() {
+                setHiddenFieldValue();
+            }, 1000);
+
         });
-
-        var hiddenField = $('.wishlist-product-list input[name="text-4"]');
-        if (hiddenField.length) {
-            hiddenField.val(productNames.join(', '));
-        }
-    }
-
-    $('form').on('submit', function(event) {
-        setHiddenFieldValue();
-    });
-
-    setTimeout(function() {
-        setHiddenFieldValue();
-    }, 1000); 
-    
-});
     </script>
 <?php }
 ?>
 
 <script>
-jQuery(document).ready(function($) {
-    $('a.wp-block-social-link-anchor').attr('target', '_blank');
-    
-});
+    jQuery(document).ready(function($) {
+        $('a.wp-block-social-link-anchor').attr('target', '_blank');
+
+    });
 
 
 
@@ -279,12 +278,10 @@ jQuery(document).ready(function($) {
         },
 
     });
-
-
 </script>
 
 <?php
-if (is_single()):?>
+if (is_single()): ?>
     <script src="<?= esc_url(get_template_directory_uri()); ?>/assets/js/jquery.fancybox.min.js"></script>
 
     <script>
@@ -296,7 +293,7 @@ if (is_single()):?>
             });
 
             $('[data-fancybox]').fancybox({
-                caption : function(instance, item) {
+                caption: function(instance, item) {
                     return $(this).data('caption') || '';
                 }
             });
@@ -304,7 +301,6 @@ if (is_single()):?>
     </script>
 
     <script>
-
         // var Gallery_slider_modal = new Swiper(".Gallery_slider_modal", {
         //     slidesPerView:1,
         //     spaceBetween:30,
@@ -343,7 +339,7 @@ if (is_single()):?>
         //     Gallery_slider_modal.slideTo($indexCanGo, 1000, false);
         // })
 
-        $('#addToWishListSection').on('click', function () {
+        $('#addToWishListSection').on('click', function() {
             event.preventDefault();
             var P_ID = $(this).attr('data-post');
             var myWishList = getVitaCookie('myWishList');
@@ -352,7 +348,7 @@ if (is_single()):?>
                 var arr = JSON.parse(json_str);
                 if (jQuery.inArray(P_ID, arr) !== -1) {
                     // delete from array
-                    arr = jQuery.grep(arr, function (value) {
+                    arr = jQuery.grep(arr, function(value) {
                         return value !== P_ID;
                     });
                     var json_str2 = JSON.stringify(arr);
@@ -404,13 +400,11 @@ if (is_single()):?>
         }
 
 
-    $(document).on('click', function(event) {
-        if (!$(event.target).closest('.modal-dialog').length) {
-            $('.modal').modal('hide');
-        }
-    });
-    
-
+        $(document).on('click', function(event) {
+            if (!$(event.target).closest('.modal-dialog').length) {
+                $('.modal').modal('hide');
+            }
+        });
     </script>
 
 
@@ -421,4 +415,5 @@ if (is_single()):?>
 endif;
 wp_footer(); ?>
 </body>
+
 </html>
