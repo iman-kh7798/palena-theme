@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="<?= esc_url(get_template_directory_uri()); ?>/assets/css/bootstrap-grid.min.css">
     <link rel="stylesheet" href="<?= esc_url(get_template_directory_uri()); ?>/assets/css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="<?= esc_url(get_template_directory_uri()); ?>/assets/css/swiper-bundle.min.css">
-    <link rel="stylesheet" href="<?= esc_url(get_template_directory_uri()); ?>/assets/css/palena_style.css?v=1.41">
+    <link rel="stylesheet" href="<?= esc_url(get_template_directory_uri()); ?>/assets/css/palena_style.css?v=1.42">
     <link rel="stylesheet"
         href="<?= esc_url(get_template_directory_uri()); ?>/assets/css/palena_media_query.css?v=1.55">
     <?php if (is_single()): ?>

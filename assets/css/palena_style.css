@@ -1407,6 +1407,9 @@ span.input-has-error {
     margin-top: 0 !important;
 }
 
+.single-product-accordion{
+    margin-top: 3rem;
+}
 
 .single-product-accordion .card{
 border: 0;

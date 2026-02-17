@@ -142,7 +142,7 @@ endif; ?>
                                         ADD TO WISH LIST
                                     </div>
                                 </div>
-                                <div class="accordion single-product-accordion mt-4" id="accordionExample">
+                                <div class="accordion single-product-accordion" id="accordionExample">
                                     <div class="card">
                                         <div class="card-header" id="headingOne">
                                             <h2 class="mb-0">
@@ -168,7 +168,7 @@ endif; ?>
                         <?php
                         $photos_query = get_post_meta(get_the_ID(), 'gallery_data', true);
                         $photos_array = (array) $photos_query;
-                        $urls = $photos_array['image_url'] ?? [];
+                        $urls = array_slice($photos_array['image_url'], 0, 3)  ?? [];
 
                         if (!empty($urls)):
                             foreach ($urls as $index => $url_item):
@@ -212,7 +212,7 @@ endif; ?>
             <div class="container mt-5 family_box">
                 <div class="row archive">
                     <div class="col-12">
-                        <h5>Family</h5>
+                        <h5 class="h5">Family</h5>
                     </div>
 
                     <?php
@@ -222,7 +222,7 @@ endif; ?>
                         $size = $size1[0]->slug;
                         if ($size == 'horizontal'):
                     ?>
-                            <div class="mt-4 col-6 col-md-4 col-lg-3">
+                            <div class="col-6 col-md-4 col-lg-3">
                                 <div class="card mb-3 border-0">
                                     <?php $photos_query_Horizontal_thumb = get_post_meta($FamilyItem, 'Horizontal_thumb_data', true);
                                     $photos_array_Horizontal_thumb = (array)($photos_query_Horizontal_thumb);
@@ -241,7 +241,7 @@ endif; ?>
                         <?php endif;
                         if ($size == 'vertical'):
                         ?>
-                            <div class="mt-4 col-6 col-md-4 col-lg-3">
+                            <div class="col-6 col-md-4">
                                 <div class="card mb-3 border-0">
                                     <?php $photos_query_Vertical_thumb = get_post_meta($FamilyItem, 'Vertical_thumb_data', true);
                                     $photos_array_Vertical_thumb = (array)($photos_query_Vertical_thumb);
