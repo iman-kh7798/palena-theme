@@ -15,7 +15,7 @@ endif; ?>
         the_post();
         setPostViews(get_the_ID());
         global $post; ?>
-        <div class="product_info container mt-5">
+        <div class="product_info content-container mt-5">
             <div class="row">
                 <div class="col-12">
                     <div id="galleryCarousel"
@@ -60,18 +60,22 @@ endif; ?>
 
                         <!-- controls -->
                         <a class="carousel-control-prev" href="#galleryCarousel" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon"></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223" />
+                            </svg>
                         </a>
 
                         <a class="carousel-control-next" href="#galleryCarousel" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon"></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-chevron-compact-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M6.776 1.553a.5.5 0 0 1 .671.223l3 6a.5.5 0 0 1 0 .448l-3 6a.5.5 0 1 1-.894-.448L9.44 8 6.553 2.224a.5.5 0 0 1 .223-.671" />
+                            </svg>
                         </a>
                     </div>
                 </div>
                 <div class="col-12 pb-4">
                     <div class="sticky-top">
                         <div class="row pt-3 justify-content-between">
-                            <div class="col-12 col-md-5">
+                            <div class="col-12 col-md-6">
                                 <h1 class="h2"><?php the_title(); ?></h1>
                                 <div class="text-justify ">
                                     <?php the_content(); ?>
@@ -82,10 +86,10 @@ endif; ?>
                                     style="font-size: .8rem; color: #969696" href="<?= site_url('/') ?>wish-list">(View
                                     Your Collection)</a>
                                 <div class="productAction">
-                                    <button class="btn btn_outline_pf  w-100 mt-4 text-sm" data-toggle="modal"
+                                    <button style="background-color: #000;color:white;" class="btn btn_outline_pf  w-100 mt-4 text-sm" data-toggle="modal"
                                         data-target="#ask_seller_modal">REQUEST A QUOTE
                                     </button>
-                                    <button class="btn btn_outline_pf  w-100 mt-3 text-sm" data-toggle="modal"
+                                    <button style="background-color: #000;color:white;" class="btn btn_outline_pf  w-100 mt-3 text-sm" data-toggle="modal"
                                         data-target="#ask_seller_modal_custom">REQUEST CUSTOMIZATION
                                     </button>
                                     <!-- Modal -->
@@ -146,8 +150,14 @@ endif; ?>
                                     <div class="card">
                                         <div class="card-header" id="headingOne">
                                             <h2 class="mb-0">
-                                                <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                    Collapsible Group Item #1
+                                                <button class="btn btn-block text-left" style="background-color: white;" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                    <div class="d-flex justify-content-between">
+                                                        <span>Collapsible Group Item #1</span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                                                        </svg>
+                                                    </div>
+
                                                 </button>
                                             </h2>
                                         </div>
@@ -178,7 +188,7 @@ endif; ?>
                         ?>
 
                                 <?php if (in_array($file_extension, ['jpg', 'jpeg', 'png', 'gif'])): ?>
-                                    <div class="col-6 col-md-4">
+                                    <div class="col-4 ">
                                         <a href="<?= esc_url($url_item) ?>">
                                             <img
                                                 src="<?= esc_url($url_item) ?>"
@@ -209,7 +219,7 @@ endif; ?>
 
         if (!empty($Family)) {
         ?>
-            <div class="container mt-5 family_box">
+            <div class="content-container mt-5 family_box">
                 <div class="row archive">
                     <div class="col-12">
                         <h5 class="h5">Family</h5>
